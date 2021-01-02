@@ -1,5 +1,6 @@
 const FILES_TO_CACHE = [
     "/",
+    '/index.html',
     "/indexDb.js",
     "/manifest.json",
     "/styles.css",
@@ -12,6 +13,7 @@ const STATIC_CACHE = "static-cache-v1";
 const RUNTIME_CACHE = "runtime-cache";
 
 self.addEventListener("install", event => {
+    console.log('Install on 15-23');
     event.waitUntil(
         caches
             .open(STATIC_CACHE)
@@ -44,6 +46,7 @@ self.addEventListener("activate", event => {
 });
 
 self.addEventListener("fetch", event => {
+    console.log('eventListen on 48-93');
     // non GET requests are not cached and requests to other origins are not cached
     if (
         event.request.method !== "GET" ||
@@ -58,6 +61,7 @@ self.addEventListener("fetch", event => {
         // make network request and fallback to cache if network request fails (offline)
         event.respondWith(
             caches.open(RUNTIME_CACHE).then(cache => {
+                console.log('offline (if) on 60-74');
                 return fetch(event.request)
                     .then(response => {
                         cache.put(event.request, response.clone());

@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const compression = require("compression");
 
 const PORT = process.env.PORT || 3000;
-// const mongodb_uri = process.env.MONGODB_URI ||"mongodb:27017/localhost/pwa_budget";
+// const mongodb_uri = process.env.MONGODB_URI ||"mongodb://27017/localhost/budget";
 const app = express();
 
 app.use(logger("dev"));
@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(express.static("public"));
 
-mongoose.connect(process.env.MONGODB_URI ||"mongodb://localhost/budget", {
+mongoose.connect(process.env.MONGODB_URI ||"mongodb://localhost:27017/budget", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
